@@ -34,4 +34,3 @@ script = ExtResource("4_b1iqb")
 
 [connection signal="on_ball_hit" from="left" to="ShakeCamera" method="_paddle_on_ball_hit"]
 [connection signal="on_ball_hit" from="right" to="ShakeCamera" method="_paddle_on_ball_hit"]
-[connection signal="out_of_bounds" from="ball" to="Points" method="_on_ball_out_of_bounds"]
