@@ -5,8 +5,7 @@ var left_points = 0
 @onready var right_label: Label = $Right
 var right_points = 0
 
-#@export var left_paddle: Area2D
-@onready var left_paddle = $"../left"
+@onready var left_paddle: Paddle = $"../left"
 @onready var right_paddle = $"../right"
 @onready var ball: Ball = $"../ball"
 
@@ -25,5 +24,4 @@ func _on_ball_out_of_bounds(left: bool) -> void:
 		
 	left_paddle.position = left_paddle.start_pos
 	right_paddle.position = right_paddle.start_pos
-	ball.position = ball.start_pos
-	ball.randomize_direction()
+	ball.init()

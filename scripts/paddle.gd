@@ -1,4 +1,5 @@
 extends Area2D
+class_name Paddle
 
 signal on_ball_hit(ball_speed: float)
 

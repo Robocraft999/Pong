@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvo3300yf57rt"]
 
-[ext_resource type="Script" path="res://points.gd" id="1_54f6k"]
+[ext_resource type="Script" path="res://scripts/points.gd" id="1_fxp7b"]
 
 [node name="Points" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 23.0
-script = ExtResource("1_54f6k")
+script = ExtResource("1_fxp7b")
 
 [node name="Left" type="Label" parent="."]
 layout_mode = 0
