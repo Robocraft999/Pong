@@ -1,8 +1,8 @@
 extends Area2D
 
-var speed = 300.
+var speed: float = 300.
 
-var direction: Vector2 = Vector2.RIGHT + Vector2.UP #if randf() < 0.5 else Vector2.RIGHT
+var direction: Vector2 = Vector2.LEFT if randf() < 0.5 else Vector2.RIGHT
 @onready var extents_y: float = $Sprite2D.get_rect().size.y / 2. * $Sprite2D.global_scale.y
 @onready var screen_y = get_viewport_rect().size.y
 
