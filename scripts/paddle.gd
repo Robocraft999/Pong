@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	var normal := Vector2.RIGHT if area.direction.x < 0 else Vector2.LEFT
 	var radians = normal.angle_to(area.direction)
-	var direction_out = normal.rotated(PI).rotated(-radians)
+	var direction_out = normal.rotated(PI).rotated(-radians).rotated((randf()-0.5) * PI * 0.05)
 	area.direction = direction_out
 	
 	on_ball_hit.emit(area.speed)
