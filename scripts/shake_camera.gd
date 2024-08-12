@@ -1,6 +1,7 @@
 extends Camera2D
 
 @onready var noise = FastNoiseLite.new()
+@onready var overlay_ui = $"../OverlayUI"
 
 @export var NOISE_ADVANCE_SPEED := 30.0
 @export var SHAKE_DECAY_RATE := 5.0
@@ -23,7 +24,14 @@ func _process(delta: float) -> void:
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
 	
 	var shake_noise = get_noise() * shake_strength
+	
+	# Reset UI Shake
+	overlay_ui.position -= offset
+	
+	# Shake camera, move UI accordingly
 	offset = shake_noise
+	overlay_ui.position += shake_noise
+	
 	pass
 
 
@@ -34,6 +42,6 @@ func _paddle_on_ball_hit(ball_speed: float) -> void:
 	shake_y = 1.
 
 
-func _on_ball_boundary_hit(ceiling: bool, ball_speed: float) -> void:
+func _on_ball_boundary_hit(ball_speed: float) -> void:
 	shake_x = 0.
 	shake_strength = 0.0 if ball_speed < shake_start_speed_threshold else ball_speed - shake_start_speed_threshold

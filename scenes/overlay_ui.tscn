@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://fqv278rljucs"]
+
+[ext_resource type="PackedScene" uid="uid://cvo3300yf57rt" path="res://scenes/points.tscn" id="1_txrmn"]
+[ext_resource type="PackedScene" uid="uid://0cjeo53k8asj" path="res://scenes/fps_counter.tscn" id="2_5drmw"]
+
+[node name="OverlayUI" type="Node2D"]
+
+[node name="Points" parent="." instance=ExtResource("1_txrmn")]
+
+[node name="FPS" parent="." instance=ExtResource("2_5drmw")]
+metadata/_edit_use_anchors_ = true

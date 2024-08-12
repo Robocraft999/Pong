@@ -9,7 +9,7 @@ var direction: Vector2
 @onready var start_pos = position
 
 signal out_of_bounds(left: bool)
-signal boundary_hit(ceiling: bool, ball_speed: float)
+signal boundary_hit(ball_speed: float)
 
 func _ready() -> void:
 	randomize_direction()
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	var ceiling_hit = position.y <= extents_y or is_equal_approx(extents_y, position.y)
 	var floor_hit   = position.y >= (screen_size.y - extents_y) or is_equal_approx(position.y, screen_size.y - extents_y)
 	if ceiling_hit or floor_hit:
-		boundary_hit.emit(ceiling_hit, speed)
+		boundary_hit.emit(speed)
 		direction.y *= -1
 		pass
 	pass

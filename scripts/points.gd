@@ -5,9 +5,9 @@ var left_points = 0
 @onready var right_label: Label = $Right
 var right_points = 0
 
-@onready var left_paddle: Paddle = $"../left"
-@onready var right_paddle = $"../right"
-@onready var ball: Ball = $"../ball"
+@onready var left_paddle: Paddle = $"../../left"
+@onready var right_paddle: Paddle = $"../../right"
+@onready var ball: Ball = $"../../ball"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
