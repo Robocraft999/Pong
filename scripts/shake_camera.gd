@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
 	
 	var shake_noise = get_noise() * shake_strength
+	shake_noise *= 0 if not OptionsManager.enable_screen_shake else 1.0
 	
 	# Reset UI Shake
 	overlay_ui.position -= offset

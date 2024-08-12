@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://chj0qvrtmbjmw"]
+
+[ext_resource type="Script" path="res://scripts/ui_manager.gd" id="1_bre6x"]
+
+[node name="OptionsMenu" type="Node2D"]
+
+[node name="UIManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bre6x")
+
+[node name="CameraShakeButton" type="Button" parent="UIManager"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 208.0
+offset_right = 299.0
+offset_bottom = 237.0
+toggle_mode = true
+text = "Enable Camera Shake"
+
+[node name="StartButton" type="Button" parent="UIManager"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 336.0
+offset_right = 599.0
+offset_bottom = 414.0
+text = "Start"
+
+[connection signal="toggled" from="UIManager/CameraShakeButton" to="UIManager" method="_on_camera_shake_button_toggled"]
+[connection signal="pressed" from="UIManager/StartButton" to="UIManager" method="_on_start_button_pressed"]

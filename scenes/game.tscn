@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk23px04k66dx"]
+
+[ext_resource type="PackedScene" uid="uid://duewtiu1o8faq" path="res://scenes/paddle.tscn" id="2_p5p3j"]
+[ext_resource type="PackedScene" uid="uid://cwm5o38o3up4b" path="res://scenes/ball.tscn" id="3_kfg4d"]
+[ext_resource type="PackedScene" uid="uid://cg6xxp0pls5le" path="res://scenes/overlay_ui.tscn" id="4_ar4ui"]
+[ext_resource type="Script" path="res://scripts/shake_camera.gd" id="4_b1iqb"]
+[ext_resource type="Script" path="res://scripts/overlay_ui.gd" id="5_nv267"]
+
+[node name="game" type="Node2D"]
+
+[node name="left" parent="." instance=ExtResource("2_p5p3j")]
+position = Vector2(64, 320)
+action_name_up = "left_up"
+action_name_down = "left_down"
+
+[node name="right" parent="." instance=ExtResource("2_p5p3j")]
+position = Vector2(1088, 320)
+action_name_up = "right_up"
+action_name_down = "right_down"
+
+[node name="ball" parent="." instance=ExtResource("3_kfg4d")]
+position = Vector2(576, 320)
+scale = Vector2(0.05, 0.05)
+
+[node name="ShakeCamera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("4_b1iqb")
+
+[node name="OverlayUI" parent="." instance=ExtResource("4_ar4ui")]
+script = ExtResource("5_nv267")
+
+[connection signal="on_ball_hit" from="left" to="ShakeCamera" method="_paddle_on_ball_hit"]
+[connection signal="on_ball_hit" from="right" to="ShakeCamera" method="_paddle_on_ball_hit"]
+[connection signal="boundary_hit" from="ball" to="ShakeCamera" method="_on_ball_boundary_hit"]
+[connection signal="out_of_bounds" from="ball" to="OverlayUI" method="_on_ball_out_of_bounds"]

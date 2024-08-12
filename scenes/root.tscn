@@ -1,35 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk23px04k66dx"]
+[gd_scene load_steps=4 format=3 uid="uid://dxiqm26v2onne"]
 
-[ext_resource type="PackedScene" uid="uid://duewtiu1o8faq" path="res://scenes/paddle.tscn" id="2_p5p3j"]
-[ext_resource type="PackedScene" uid="uid://cwm5o38o3up4b" path="res://scenes/ball.tscn" id="3_kfg4d"]
-[ext_resource type="PackedScene" uid="uid://fqv278rljucs" path="res://scenes/overlay_ui.tscn" id="4_ar4ui"]
-[ext_resource type="Script" path="res://scripts/shake_camera.gd" id="4_b1iqb"]
-[ext_resource type="Script" path="res://scripts/overlay_ui.gd" id="5_nv267"]
+[ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_5wert"]
+[ext_resource type="PackedScene" uid="uid://chj0qvrtmbjmw" path="res://scenes/options_menu.tscn" id="2_bdpl0"]
+[ext_resource type="PackedScene" uid="uid://bk23px04k66dx" path="res://scenes/game.tscn" id="3_276vx"]
 
-[node name="root" type="Node2D"]
+[node name="root" type="Node"]
 
-[node name="left" parent="." instance=ExtResource("2_p5p3j")]
-position = Vector2(64, 320)
-action_name_up = "left_up"
-action_name_down = "left_down"
-
-[node name="right" parent="." instance=ExtResource("2_p5p3j")]
-position = Vector2(1088, 320)
-action_name_up = "right_up"
-action_name_down = "right_down"
-
-[node name="ball" parent="." instance=ExtResource("3_kfg4d")]
-position = Vector2(576, 320)
-scale = Vector2(0.05, 0.05)
-
-[node name="ShakeCamera" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-script = ExtResource("4_b1iqb")
-
-[node name="OverlayUI" parent="." instance=ExtResource("4_ar4ui")]
-script = ExtResource("5_nv267")
-
-[connection signal="on_ball_hit" from="left" to="ShakeCamera" method="_paddle_on_ball_hit"]
-[connection signal="on_ball_hit" from="right" to="ShakeCamera" method="_paddle_on_ball_hit"]
-[connection signal="boundary_hit" from="ball" to="ShakeCamera" method="_on_ball_boundary_hit"]
-[connection signal="out_of_bounds" from="ball" to="OverlayUI" method="_on_ball_out_of_bounds"]
+[node name="SceneManager" type="Node2D" parent="."]
+script = ExtResource("1_5wert")
+editor_scenes = Array[PackedScene]([ExtResource("2_bdpl0"), ExtResource("3_276vx")])
