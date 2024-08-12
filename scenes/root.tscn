@@ -25,12 +25,13 @@ action_name_down = "right_down"
 position = Vector2(576, 320)
 scale = Vector2(0.05, 0.05)
 
-[node name="Points" parent="." instance=ExtResource("4_hnujd")]
-script = null
-
 [node name="ShakeCamera" type="Camera2D" parent="."]
-position = Vector2(576, 320)
+position = Vector2(576, 324)
 script = ExtResource("4_b1iqb")
+
+[node name="Points" parent="." instance=ExtResource("4_hnujd")]
 
 [connection signal="on_ball_hit" from="left" to="ShakeCamera" method="_paddle_on_ball_hit"]
 [connection signal="on_ball_hit" from="right" to="ShakeCamera" method="_paddle_on_ball_hit"]
+[connection signal="boundary_hit" from="ball" to="ShakeCamera" method="_on_ball_boundary_hit"]
+[connection signal="out_of_bounds" from="ball" to="Points" method="_on_ball_out_of_bounds"]

@@ -8,12 +8,15 @@ extends Camera2D
 var shake_strength := 0.0
 var noise_index := 0.
 
+var shake_x := 1.
+var shake_y := 1.
+
 func get_noise():
 	noise_index += NOISE_ADVANCE_SPEED
 	
 	return Vector2(
-		noise.get_noise_2d(0.0, noise_index),
-		noise.get_noise_2d(100.0, noise_index)
+		noise.get_noise_2d(0.0, noise_index) * shake_x,
+		noise.get_noise_2d(100.0, noise_index) * shake_y
 	)
 
 func _process(delta: float) -> void:
@@ -26,4 +29,11 @@ func _process(delta: float) -> void:
 
 const shake_start_speed_threshold := 335.
 func _paddle_on_ball_hit(ball_speed: float) -> void:
+	shake_strength = 0.0 if ball_speed < shake_start_speed_threshold else ball_speed - shake_start_speed_threshold
+	shake_x = 1.
+	shake_y = 1.
+
+
+func _on_ball_boundary_hit(ceiling: bool, ball_speed: float) -> void:
+	shake_x = 0.
 	shake_strength = 0.0 if ball_speed < shake_start_speed_threshold else ball_speed - shake_start_speed_threshold
