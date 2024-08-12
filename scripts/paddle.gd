@@ -1,5 +1,6 @@
 extends Area2D
 
+signal on_ball_hit(ball_speed: float)
 
 const SPEED = 300.0
 var velocity = 0.0
@@ -33,4 +34,6 @@ func _on_area_entered(area: Area2D) -> void:
 	var radians = normal.angle_to(area.direction)
 	var direction_out = normal.rotated(PI).rotated(-radians)
 	area.direction = direction_out
+	
+	on_ball_hit.emit(area.speed)
 	

@@ -1,13 +1,13 @@
 extends Area2D
 class_name Ball
 
-var speed = 300.
-var direction: Vector2 = Vector2.RIGHT + Vector2.UP #if randf() < 0.5 else Vector2.RIGHT
+var speed: float = 300.
 
-@onready var start_pos = position
+var direction: Vector2
 @onready var extents_y: float = $Sprite2D.get_rect().size.y / 2. * $Sprite2D.global_scale.y
 @onready var screen_size = get_viewport_rect().size
 @onready var hitbox = $ScreenHitbox
+@onready var start_pos = position
 
 signal out_of_bounds(left: bool)
 
