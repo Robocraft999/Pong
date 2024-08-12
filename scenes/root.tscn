@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://beathu5nqyvs7"]
+[gd_scene load_steps=5 format=3 uid="uid://bk23px04k66dx"]
 
 [ext_resource type="PackedScene" uid="uid://0cjeo53k8asj" path="res://scenes/FPSCounter.tscn" id="1_imgt1"]
-[ext_resource type="PackedScene" uid="uid://c4t861ys6uik8" path="res://scenes/paddle.tscn" id="2_p5p3j"]
-[ext_resource type="PackedScene" uid="uid://dw107mg5r4i4l" path="res://scenes/Ball.tscn" id="3_kfg4d"]
+[ext_resource type="PackedScene" uid="uid://duewtiu1o8faq" path="res://scenes/Paddle.tscn" id="2_p5p3j"]
+[ext_resource type="PackedScene" uid="uid://cwm5o38o3up4b" path="res://scenes/Ball.tscn" id="3_kfg4d"]
+[ext_resource type="PackedScene" uid="uid://cvo3300yf57rt" path="res://scenes/points.tscn" id="4_hnujd"]
 
 [node name="root" type="Node2D"]
 
-[node name="Label" parent="." instance=ExtResource("1_imgt1")]
+[node name="FPS" parent="." instance=ExtResource("1_imgt1")]
 metadata/_edit_use_anchors_ = true
 
 [node name="left" parent="." instance=ExtResource("2_p5p3j")]
@@ -22,3 +23,7 @@ action_name_down = "right_down"
 [node name="ball" parent="." instance=ExtResource("3_kfg4d")]
 position = Vector2(576, 320)
 scale = Vector2(0.05, 0.05)
+
+[node name="Points" parent="." instance=ExtResource("4_hnujd")]
+
+[connection signal="out_of_bounds" from="ball" to="Points" method="_on_ball_out_of_bounds"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw107mg5r4i4l"]
+[gd_scene load_steps=4 format=3 uid="uid://cwm5o38o3up4b"]
 
 [ext_resource type="Texture2D" uid="uid://8qhohpygadn1" path="res://sprites/ball.svg" id="1_8qcey"]
 [ext_resource type="Script" path="res://scripts/Ball.gd" id="1_td3r1"]
@@ -14,3 +14,7 @@ texture = ExtResource("1_8qcey")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ms42p")
+
+[node name="ScreenHitbox" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="ScreenHitbox" to="." method="_on_screen_hitbox_screen_exited"]

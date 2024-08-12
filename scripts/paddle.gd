@@ -10,6 +10,7 @@ var extents_y: float
 @export var action_name_down: String
 
 @onready var shape: Sprite2D = $Sprite2D
+@onready var start_pos = position
 
 func _ready():
 	screen_size = get_viewport_rect().size
