@@ -1,32 +1,98 @@
-[gd_scene load_steps=2 format=3 uid="uid://chj0qvrtmbjmw"]
+[gd_scene load_steps=5 format=3 uid="uid://chj0qvrtmbjmw"]
 
 [ext_resource type="Script" path="res://scripts/ui_manager.gd" id="1_bre6x"]
+[ext_resource type="PackedScene" uid="uid://btfw5ywd70cja" path="res://scenes/shaker.tscn" id="2_o1myv"]
+
+[sub_resource type="Theme" id="Theme_k4rr0"]
+BoxContainer/constants/separation = 4
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_wufl1"]
 
 [node name="OptionsMenu" type="Node2D"]
 
 [node name="UIManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1150.0
+offset_bottom = 645.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_k4rr0")
 script = ExtResource("1_bre6x")
+metadata/_edit_lock_ = true
 
-[node name="CameraShakeButton" type="Button" parent="UIManager"]
-layout_mode = 0
-offset_left = 268.0
-offset_top = 208.0
-offset_right = 299.0
-offset_bottom = 237.0
-toggle_mode = true
-text = "Enable Camera Shake"
+[node name="Panel" type="Panel" parent="UIManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
 
-[node name="StartButton" type="Button" parent="UIManager"]
-layout_mode = 0
-offset_left = 516.0
-offset_top = 336.0
-offset_right = 599.0
-offset_bottom = 414.0
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.5
+offset_top = -102.0
+offset_right = 118.5
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CameraShakeButton" type="CheckButton" parent="UIManager/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Seperator" type="Control" parent="UIManager/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIManager/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="UIManager/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
 text = "Start"
 
-[connection signal="toggled" from="UIManager/CameraShakeButton" to="UIManager" method="_on_camera_shake_button_toggled"]
-[connection signal="pressed" from="UIManager/StartButton" to="UIManager" method="_on_start_button_pressed"]
+[node name="QuitButton" type="Button" parent="UIManager/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Quit"
+
+[node name="Shaker" parent="UIManager" instance=ExtResource("2_o1myv")]
+shake_decay_rate = 0.0
+shake_strength = 35.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UIManager/Shaker"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 421.0
+offset_top = 58.0
+offset_right = 729.0
+offset_bottom = 195.0
+grow_horizontal = 2
+theme_override_font_sizes/italics_font_size = 100
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[i]PONG[i]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+custom_effects = [SubResource("RichTextEffect_wufl1")]
+
+[connection signal="toggled" from="UIManager/VBoxContainer/CameraShakeButton" to="UIManager" method="_on_camera_shake_button_toggled"]
+[connection signal="pressed" from="UIManager/VBoxContainer/HBoxContainer/StartButton" to="UIManager" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UIManager/VBoxContainer/HBoxContainer/QuitButton" to="UIManager" method="_on_quit_button_pressed"]

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func populate_loadable_scenes_list():
 	for scene in editor_scenes:
-		print(add_level_scene_to_scene_array(scene));
+		add_level_scene_to_scene_array(scene);
 		
 func load_level_scene_by_index(scene_index : int):
 	if(scene_index < 0 || scene_index > loadable_scenes.size()):
@@ -49,7 +49,7 @@ func load_level_scene(scene_to_load : LoadableScene, scene_index : int):
 
 	get_tree().root.add_child.call_deferred(new_scene);
 
-	print(new_scene);
+	#print(new_scene);
 
 	return current_scene;
 	
@@ -62,7 +62,7 @@ func add_level_scene_to_scene_array(scene):
 	
 	var scene_name : String = scene._bundled["names"][0];
 
-	print(scene_name);
+	#print(scene_name);
 	
 	var i : int = 0;
 

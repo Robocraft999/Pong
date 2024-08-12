@@ -1,35 +1,80 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk23px04k66dx"]
+[gd_scene load_steps=11 format=3 uid="uid://bk23px04k66dx"]
 
 [ext_resource type="PackedScene" uid="uid://duewtiu1o8faq" path="res://scenes/paddle.tscn" id="2_p5p3j"]
 [ext_resource type="PackedScene" uid="uid://cwm5o38o3up4b" path="res://scenes/ball.tscn" id="3_kfg4d"]
 [ext_resource type="PackedScene" uid="uid://cg6xxp0pls5le" path="res://scenes/overlay_ui.tscn" id="4_ar4ui"]
-[ext_resource type="Script" path="res://scripts/shake_camera.gd" id="4_b1iqb"]
+[ext_resource type="PackedScene" uid="uid://btfw5ywd70cja" path="res://scenes/shaker.tscn" id="4_x7am8"]
 [ext_resource type="Script" path="res://scripts/overlay_ui.gd" id="5_nv267"]
+[ext_resource type="Script" path="res://scripts/boundary_collider.gd" id="6_cw2pu"]
+[ext_resource type="Script" path="res://scripts/goal_collider.gd" id="7_micr0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwdo4"]
+size = Vector2(115.2, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q156k"]
+size = Vector2(8, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkdu0"]
+size = Vector2(8, 648)
 
 [node name="game" type="Node2D"]
-
-[node name="left" parent="." instance=ExtResource("2_p5p3j")]
-position = Vector2(64, 320)
-action_name_up = "left_up"
-action_name_down = "left_down"
-
-[node name="right" parent="." instance=ExtResource("2_p5p3j")]
-position = Vector2(1088, 320)
-action_name_up = "right_up"
-action_name_down = "right_down"
-
-[node name="ball" parent="." instance=ExtResource("3_kfg4d")]
-position = Vector2(576, 320)
-scale = Vector2(0.05, 0.05)
-
-[node name="ShakeCamera" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-script = ExtResource("4_b1iqb")
 
 [node name="OverlayUI" parent="." instance=ExtResource("4_ar4ui")]
 script = ExtResource("5_nv267")
 
-[connection signal="on_ball_hit" from="left" to="ShakeCamera" method="_paddle_on_ball_hit"]
-[connection signal="on_ball_hit" from="right" to="ShakeCamera" method="_paddle_on_ball_hit"]
-[connection signal="boundary_hit" from="ball" to="ShakeCamera" method="_on_ball_boundary_hit"]
-[connection signal="out_of_bounds" from="ball" to="OverlayUI" method="_on_ball_out_of_bounds"]
+[node name="Shaker" parent="." instance=ExtResource("4_x7am8")]
+unique_name_in_owner = true
+shake_decay_rate = 5.0
+
+[node name="ball" parent="Shaker" instance=ExtResource("3_kfg4d")]
+unique_name_in_owner = true
+position = Vector2(576, 320)
+scale = Vector2(0.05, 0.05)
+
+[node name="right" parent="Shaker" instance=ExtResource("2_p5p3j")]
+unique_name_in_owner = true
+position = Vector2(1088, 320)
+action_name_up = "right_up"
+action_name_down = "right_down"
+
+[node name="left" parent="Shaker" instance=ExtResource("2_p5p3j")]
+unique_name_in_owner = true
+position = Vector2(64, 320)
+action_name_up = "left_up"
+action_name_down = "left_down"
+
+[node name="Ceiling" type="Area2D" parent="Shaker"]
+script = ExtResource("6_cw2pu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/Ceiling"]
+position = Vector2(576, -4)
+scale = Vector2(10, 1)
+shape = SubResource("RectangleShape2D_nwdo4")
+
+[node name="Floor" type="Area2D" parent="Shaker"]
+scale = Vector2(10, 1)
+script = ExtResource("6_cw2pu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/Floor"]
+position = Vector2(57.6, 652)
+shape = SubResource("RectangleShape2D_nwdo4")
+
+[node name="LeftGoal" type="Area2D" parent="Shaker"]
+script = ExtResource("7_micr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/LeftGoal"]
+position = Vector2(-4, 324)
+shape = SubResource("RectangleShape2D_q156k")
+
+[node name="GoalCollider" type="Area2D" parent="Shaker"]
+script = ExtResource("7_micr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/GoalCollider"]
+position = Vector2(1156, 324)
+shape = SubResource("RectangleShape2D_gkdu0")
+
+[connection signal="out_of_bounds" from="Shaker/ball" to="OverlayUI" method="_on_ball_out_of_bounds"]
+[connection signal="area_entered" from="Shaker/Ceiling" to="Shaker/Ceiling" method="_on_area_entered"]
+[connection signal="area_entered" from="Shaker/Floor" to="Shaker/Floor" method="_on_area_entered"]
+[connection signal="area_entered" from="Shaker/LeftGoal" to="Shaker/LeftGoal" method="_on_area_entered"]
+[connection signal="area_entered" from="Shaker/GoalCollider" to="Shaker/GoalCollider" method="_on_area_entered"]

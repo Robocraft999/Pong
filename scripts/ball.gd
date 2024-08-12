@@ -7,29 +7,20 @@ var direction: Vector2
 @onready var extents_y: float = $Sprite2D.get_rect().size.y / 2. * $Sprite2D.global_scale.y
 @onready var screen_size = get_viewport_rect().size
 @onready var start_pos = position
+@onready var shaker: Shaker = %Shaker
+@onready var left_paddle: Paddle = %left
+@onready var right_paddle: Paddle = %right
 
 signal out_of_bounds(left: bool)
-signal boundary_hit(ball_speed: float)
 
 func _ready() -> void:
 	randomize_direction()
 
+
+const shake_start_speed_threshold := 335.
 func _physics_process(delta: float) -> void:
 	speed += speed * 0.05 * delta
 	translate(direction * speed * delta)
-	
-	# ceiling or floor
-	var ceiling_hit = position.y <= extents_y or is_equal_approx(extents_y, position.y)
-	var floor_hit   = position.y >= (screen_size.y - extents_y) or is_equal_approx(position.y, screen_size.y - extents_y)
-	if ceiling_hit or floor_hit:
-		boundary_hit.emit(speed)
-		direction.y *= -1
-		pass
-	pass
-	
-	# boundry
-	if position.x < -10 or position.x > screen_size.x + 10:
-		out_of_bounds.emit(position.x < 0)
 	
 func init():
 	randomize_direction()
@@ -38,3 +29,7 @@ func init():
 	
 func randomize_direction():
 	direction = (Vector2.LEFT if randf() < 0.5 else Vector2.RIGHT).rotated((randf()-0.5) * PI * 0.9)
+
+func shake(shake_x: bool):
+	shaker.shake_strength = 0.0 if speed < shake_start_speed_threshold else speed - shake_start_speed_threshold
+	shaker.shake_x = shake_x

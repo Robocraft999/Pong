@@ -1,8 +1,6 @@
 extends Area2D
 class_name Paddle
 
-signal on_ball_hit(ball_speed: float)
-
 const SPEED = 300.0
 var velocity = 0.0
 var screen_size
@@ -13,6 +11,7 @@ var extents_y: float
 
 @onready var shape: Sprite2D = $Sprite2D
 @onready var start_pos = position
+@onready var shaker: Shaker = $".."
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -30,11 +29,13 @@ func _physics_process(delta: float) -> void:
 	position.y = clamp(position.y, extents_y, screen_size.y - extents_y)
 
 
-func _on_area_entered(area: Area2D) -> void:
-	var normal := Vector2.RIGHT if area.direction.x < 0 else Vector2.LEFT
-	var radians = normal.angle_to(area.direction)
+func _on_area_entered(ball: Ball) -> void:
+	var normal := Vector2.RIGHT if ball.direction.x < 0 else Vector2.LEFT
+	var radians = normal.angle_to(ball.direction)
 	var direction_out = normal.rotated(PI).rotated(-radians).rotated((randf()-0.5) * PI * 0.05)
-	area.direction = direction_out
+	ball.direction = direction_out
 	
-	on_ball_hit.emit(area.speed)
+	shaker.shake_strength = 0.0 if ball.speed < ball.shake_start_speed_threshold else ball.speed - ball.shake_start_speed_threshold
+	shaker.shake_x = true
+	shaker.shake_y = true
 	
