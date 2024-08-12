@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32.216587mm"
+   height="140.09721mm"
+   viewBox="0 0 32.216587 140.09721"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="paddle.svg"
+   inkscape:export-filename="/home/luca/Desktop/paddle.svg"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.5270238"
+     inkscape:cx="77.601933"
+     inkscape:cy="107.72589"
+     inkscape:window-width="1877"
+     inkscape:window-height="2096"
+     inkscape:window-x="1963"
+     inkscape:window-y="27"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-88.891704,-78.451397)">
+    <rect
+       style="fill:#ffffff;stroke:none;stroke-width:0.118935;fill-opacity:1"
+       id="rect1012"
+       width="32.097652"
+       height="139.97827"
+       x="88.951172"
+       y="78.510864" />
+  </g>
+</svg>

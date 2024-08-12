@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://duewtiu1o8faq"]
+
+[ext_resource type="Texture2D" uid="uid://mpyt2sb6ykdf" path="res://sprites/paddle.svg" id="1_b0qim"]
+[ext_resource type="Script" path="res://paddle.gd" id="1_iylgd"]
+
+[node name="Paddle" type="Area2D"]
+script = ExtResource("1_iylgd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.70486e-07, -1.70246e-06)
+scale = Vector2(0.131148, 0.173585)
+texture = ExtResource("1_b0qim")
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+position = Vector2(-4.70486e-07, -1.70246e-06)
+scale = Vector2(0.131148, 0.173585)
+polygon = PackedVector2Array(-61, 265, -61, -265, 61, -265, 61, 265)
