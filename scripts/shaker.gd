@@ -28,4 +28,8 @@ func _process(delta: float) -> void:
 		self.position -= last_offset
 		last_offset = get_shake() * shake_strength
 		self.position += last_offset
+	else:
+		if last_offset != Vector2.ZERO:
+			self.position -= last_offset
+			last_offset = Vector2.ZERO
 	
