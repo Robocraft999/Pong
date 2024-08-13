@@ -66,10 +66,10 @@ script = ExtResource("7_micr0")
 position = Vector2(-4, 324)
 shape = SubResource("RectangleShape2D_q156k")
 
-[node name="GoalCollider" type="Area2D" parent="Shaker"]
+[node name="RightGoal" type="Area2D" parent="Shaker"]
 script = ExtResource("7_micr0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/GoalCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shaker/RightGoal"]
 position = Vector2(1156, 324)
 shape = SubResource("RectangleShape2D_gkdu0")
 
@@ -77,4 +77,4 @@ shape = SubResource("RectangleShape2D_gkdu0")
 [connection signal="area_entered" from="Shaker/Ceiling" to="Shaker/Ceiling" method="_on_area_entered"]
 [connection signal="area_entered" from="Shaker/Floor" to="Shaker/Floor" method="_on_area_entered"]
 [connection signal="area_entered" from="Shaker/LeftGoal" to="Shaker/LeftGoal" method="_on_area_entered"]
-[connection signal="area_entered" from="Shaker/GoalCollider" to="Shaker/GoalCollider" method="_on_area_entered"]
+[connection signal="area_entered" from="Shaker/RightGoal" to="Shaker/RightGoal" method="_on_area_entered"]

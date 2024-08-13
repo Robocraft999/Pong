@@ -21,7 +21,7 @@ OptionsManager="*res://scripts/options_manager.gd"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
