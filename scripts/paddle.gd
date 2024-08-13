@@ -29,13 +29,15 @@ func _physics_process(delta: float) -> void:
 	position.y = clamp(position.y, extents_y, screen_size.y - extents_y)
 
 
-func _on_area_entered(ball: Ball) -> void:
-	var normal := Vector2.RIGHT if ball.direction.x < 0 else Vector2.LEFT
-	var radians = normal.angle_to(ball.direction)
-	var direction_out = normal.rotated(PI).rotated(-radians).rotated((randf()-0.5) * PI * 0.05)
-	ball.direction = direction_out
-	
-	shaker.shake_strength = 0.0 if ball.speed < ball.shake_start_speed_threshold else ball.speed - ball.shake_start_speed_threshold
-	shaker.shake_x = true
-	shaker.shake_y = true
+func _on_area_entered(area: Area2D) -> void:
+	if area is Ball:
+		var ball: Ball = area
+		var normal := Vector2.RIGHT if ball.direction.x < 0 else Vector2.LEFT
+		var radians = normal.angle_to(ball.direction)
+		var direction_out = normal.rotated(PI).rotated(-radians).rotated((randf()-0.5) * PI * 0.05)
+		ball.direction = direction_out
+		
+		shaker.shake_strength = 0.0 if ball.speed < ball.shake_start_speed_threshold else ball.speed - ball.shake_start_speed_threshold
+		shaker.shake_x = true
+		shaker.shake_y = true
 	
