@@ -6,6 +6,7 @@ class_name Shaker
 @export_range(0.0, 100.0, 1.0, "or_greater") var shake_strength   := 0.0
 @export var shake_x          := true
 @export var shake_y          := true
+@export var target: NodePath  = "."
 
 @onready var noise = FastNoiseLite.new()
 
@@ -23,13 +24,15 @@ func get_shake():
 
 func _process(delta: float) -> void:
 	if OptionsManager.enable_screen_shake:
+		var target_node = get_node(target)
 		shake_strength = lerp(shake_strength, 0.0, shake_decay_rate * delta)
 
-		self.position -= last_offset
+		target_node.position -= last_offset
 		last_offset = get_shake() * shake_strength
-		self.position += last_offset
+		target_node.position += last_offset
 	else:
 		if last_offset != Vector2.ZERO:
-			self.position -= last_offset
+			var target_node = get_node(target)
+			target_node.position -= last_offset
 			last_offset = Vector2.ZERO
 	
